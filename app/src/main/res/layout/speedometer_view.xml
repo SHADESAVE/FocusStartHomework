@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.example.focusstarthomework.speedometer.ui.speedometer.ArkView
+        android:id="@+id/ark"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent" />
+
+    <com.example.focusstarthomework.speedometer.ui.speedometer.ArrowView
+        android:id="@+id/arrow"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent" />
+
+    <Button
+        android:id="@+id/gaz_button"
+        android:layout_gravity="center|bottom"
+        android:layout_marginBottom="16dp"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@string/gaz"
+        android:textSize="32sp" />
+
+</FrameLayout>
