@@ -3,36 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/A">
+    app:startDestination="@id/SpeedometerFragment">
 
     <fragment
-        android:id="@+id/A"
-        android:name="com.example.focusstarthomework.ui.fragments.A.presentation.A"
-        android:label="fragment_a"
-        tools:layout="@layout/fragment_a" >
-        <action
-            android:id="@+id/action_A_to_B"
-            app:destination="@id/B" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/B"
-        android:name="com.example.focusstarthomework.ui.fragments.B"
-        android:label="fragment_b"
-        tools:layout="@layout/fragment_b" >
-        <action
-            android:id="@+id/action_B_to_C"
-            app:destination="@id/C" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/C"
-        android:name="com.example.focusstarthomework.ui.fragments.C"
-        android:label="fragment_c"
-        tools:layout="@layout/fragment_c" >
-        <action
-            android:id="@+id/action_C_to_A"
-            app:destination="@id/A" />
-    </fragment>
+        android:id="@+id/SpeedometerFragment"
+        android:name="com.example.focusstarthomework.speedometer.ui.SpeedometerFragment"
+        android:label="fragment_speedometer"
+        tools:layout="@layout/fragment_speedometer" />
 
 </navigation>
