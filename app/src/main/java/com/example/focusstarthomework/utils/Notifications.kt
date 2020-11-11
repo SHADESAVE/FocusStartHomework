@@ -19,6 +19,20 @@ const val NOTIFICATION_ID = 1
 
 fun makeStatusNotification(message: String, context: Context) {
 
+    createNotificationChannel(context)
+    // Create the notification
+    val builder = NotificationCompat.Builder(context, CHANNEL_ID)
+        .setContentTitle(NOTIFICATION_TITLE)
+        .setSmallIcon(R.drawable.ic_launcher_background)
+        .setContentText(message)
+        .setPriority(NotificationCompat.PRIORITY_HIGH)
+        .setVibrate(LongArray(0))
+
+    // Show the notification
+    NotificationManagerCompat.from(context).notify(NOTIFICATION_ID, builder.build())
+}
+
+private fun createNotificationChannel(context: Context) {
     // Make a channel if necessary
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
         // Create the NotificationChannel, but only on API 26+ because
@@ -35,15 +49,4 @@ fun makeStatusNotification(message: String, context: Context) {
 
         notificationManager?.createNotificationChannel(channel)
     }
-
-    // Create the notification
-    val builder = NotificationCompat.Builder(context, CHANNEL_ID)
-        .setContentTitle(NOTIFICATION_TITLE)
-        .setSmallIcon(R.drawable.ic_launcher_background)
-        .setContentText(message)
-        .setPriority(NotificationCompat.PRIORITY_HIGH)
-        .setVibrate(LongArray(0))
-
-    // Show the notification
-    NotificationManagerCompat.from(context).notify(NOTIFICATION_ID, builder.build())
 }
