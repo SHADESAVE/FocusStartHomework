@@ -36,7 +36,7 @@ class TimerFragment : Fragment() {
         createTimerObserver()
 
         setupNumberPickers()
-        setupPlayButtonSwitcher()
+        setupPlayPauseButtons()
         setupRefreshButton()
     }
 
@@ -65,8 +65,20 @@ class TimerFragment : Fragment() {
             WorkInfo.State.SUCCEEDED -> if (timerState == TimerState.START || timerState == TimerState.RESUME) {
                 timer_text.text = getString(R.string.default_time)
                 timer_finish_text.visibility = View.VISIBLE
-                play_button_switcher.visibility = View.GONE
+                play_image_button.visibility = View.GONE
+                pause_image_button.visibility = View.GONE
             }
+            WorkInfo.State.RUNNING -> {
+                timerState = TimerState.START
+                changePickersVisibility(false)
+                play_image_button.visibility = View.GONE
+                pause_image_button.visibility = View.VISIBLE
+                refresh_image_button.visibility = View.VISIBLE
+
+            }
+            WorkInfo.State.CANCELLED -> if (timerState == TimerState.STOP)
+                timer_text.text = getString(R.string.default_time)
+
             else -> Unit
         }
     }
@@ -80,23 +92,22 @@ class TimerFragment : Fragment() {
         seconds_picker.maxValue = MAX_TIME
     }
 
-    private fun setupPlayButtonSwitcher() {
-        play_button_switcher.setOnClickListener {
-            if (hours_picker.value > 0 || minutes_picker.value > 0 || seconds_picker.value > 0) {
-                changePickersVisibility(false)
-
+    private fun setupPlayPauseButtons() {
+        play_image_button.setOnClickListener {
+            if (hours_picker.value > 0 || minutes_picker.value > 0 || seconds_picker.value > 0 || timerState !== TimerState.STOP) {
+                it.visibility = View.GONE
+                pause_image_button.visibility = View.VISIBLE
                 refresh_image_button.visibility = View.VISIBLE
-
-                when (play_button_switcher.currentView) {
-                    play_image ->
-                        if (timerState == TimerState.STOP)
-                            changeState(TimerState.START)
-                        else
-                            changeState(TimerState.RESUME)
-                    pause_image -> changeState(TimerState.PAUSE)
-                }
-                play_button_switcher.showNext()
+                if (timerState == TimerState.STOP)
+                    changeState(TimerState.START)
+                else
+                    changeState(TimerState.RESUME)
             }
+        }
+        pause_image_button.setOnClickListener {
+            it.visibility = View.GONE
+            play_image_button.visibility = View.VISIBLE
+            changeState(TimerState.PAUSE)
         }
     }
 
@@ -106,17 +117,18 @@ class TimerFragment : Fragment() {
 
             refreshButton.visibility = View.GONE
             timer_finish_text.visibility = View.GONE
-            play_button_switcher.visibility = View.VISIBLE
+            play_image_button.visibility = View.VISIBLE
+            pause_image_button.visibility = View.GONE
 
-            if (play_button_switcher.currentView == pause_image)
-                play_button_switcher.showNext()
+            if (timerState == TimerState.PAUSE)
+                timer_text.text = getString(R.string.default_time)
 
             changeState(TimerState.STOP)
         }
     }
 
-    private fun changePickersVisibility(visibility: Boolean) {
-        if (visibility) {
+    private fun changePickersVisibility(isVisible: Boolean) {
+        if (isVisible) {
             hours_picker.visibility = View.VISIBLE
             minutes_picker.visibility = View.VISIBLE
             seconds_picker.visibility = View.VISIBLE
@@ -142,7 +154,6 @@ class TimerFragment : Fragment() {
             TimerState.RESUME -> startTimerWorker()
             TimerState.STOP -> {
                 getWorkManager().cancelUniqueWork(TIMER_UNIQUE_NAME)
-                timer_text.text = getString(R.string.default_time)
             }
         }
     }

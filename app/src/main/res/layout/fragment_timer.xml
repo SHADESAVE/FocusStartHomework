@@ -98,40 +98,43 @@
         app:layout_constraintStart_toStartOf="@id/seconds_picker"
         app:layout_constraintTop_toBottomOf="@id/seconds_picker" />
 
-    <ImageSwitcher
-        android:id="@+id/play_button_switcher"
+        <ImageButton
+            android:id="@+id/play_image_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginBottom="48dp"
+            android:background="#00000000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/timer_text"
+            app:layout_constraintStart_toStartOf="@id/timer_text"
+            app:layout_constraintTop_toBottomOf="@+id/minutes_text"
+            app:layout_constraintVertical_bias="1.0"
+            android:src="@drawable/ic_baseline_play_circle_filled_48" />
+
+        <ImageButton
+            android:id="@+id/pause_image_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="48dp"
+            android:background="#00000000"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/play_image_button"
+            app:layout_constraintEnd_toEndOf="@id/play_image_button"
+            app:layout_constraintStart_toStartOf="@id/play_image_button"
+            app:layout_constraintTop_toTopOf="@+id/play_image_button"
+            app:layout_constraintVertical_bias="1.0"
+            android:src="@drawable/ic_baseline_pause_circle_filled_48" />
+
+    <ImageButton
+        android:id="@+id/refresh_image_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="48dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/timer_text"
-        app:layout_constraintStart_toStartOf="@id/timer_text"
-        app:layout_constraintTop_toBottomOf="@+id/minutes_text"
-        app:layout_constraintVertical_bias="1.0">
-
-        <ImageView
-            android:id="@+id/play_image"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@drawable/ic_baseline_play_circle_filled_24" />
-
-        <ImageView
-            android:id="@+id/pause_image"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@drawable/ic_baseline_pause_circle_filled_24" />
-
-    </ImageSwitcher>
-
-    <ImageView
-        android:id="@+id/refresh_image_button"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="48dp"
-        android:src="@drawable/ic_baseline_refresh_24"
+        android:src="@drawable/ic_baseline_refresh_48"
+        android:background="#00000000"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/play_button_switcher"
+        app:layout_constraintEnd_toStartOf="@id/play_image_button"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/timer_text"
         app:layout_constraintTop_toBottomOf="@id/minutes_text"
