@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">FocusStartHomework</string>
-    <string name="contacts_permission_failure">Пожалуйста, предоставьте разрешение на считывание контактов</string>
+    <string name="upload_image">Загрузить картинку</string>
+    <string name="read_storage_permission_failure">Пожалуйста, предоставьте разрешение на считывание хранилища</string>
+    <string name="chose_image">Выбрать картинку</string>
+    <string name="title_optional">Title (Optional)</string>
+    <string name="name_optional">Name (Optional)</string>
+    <string name="description_optional">Description (Optional)</string>
 </resources>

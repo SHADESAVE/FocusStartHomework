@@ -9,6 +9,6 @@
         android:id="@+id/ContactListFragment"
         android:name="com.example.focusstarthomework.contacts.ui.ContactListFragment"
         android:label="fragment_contact_list"
-        tools:layout="@layout/fragment_contact_list" />
+        tools:layout="@layout/fragment_upload_image" />
 
 </navigation>
