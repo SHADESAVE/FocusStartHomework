@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/TimerFragment">
+    app:startDestination="@id/ContactListFragment">
 
     <fragment
-        android:id="@+id/TimerFragment"
-        android:name="com.example.focusstarthomework.timer.ui.TimerFragment"
-        android:label="fragment_timer"
-        tools:layout="@layout/fragment_timer" />
+        android:id="@+id/ContactListFragment"
+        android:name="com.example.focusstarthomework.contacts.ui.ContactListFragment"
+        android:label="fragment_contact_list"
+        tools:layout="@layout/fragment_contact_list" />
 
 </navigation>

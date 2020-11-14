@@ -1,10 +1,4 @@
 <resources>
     <string name="app_name">FocusStartHomework</string>
-    <string name="default_time">00:00:00</string>
-    <string name="timer_stopped">Таймер завершён</string>
-    <string name="timer_paused">Таймер приостановлен</string>
-    <string name="time_out">Время истекло</string>
-    <string name="hours">ч</string>
-    <string name="minutes">мин</string>
-    <string name="seconds">сек</string>
+    <string name="contacts_permission_failure">Пожалуйста, предоставьте разрешение на считывание контактов</string>
 </resources>
