@@ -15,12 +15,13 @@ import kotlinx.android.synthetic.main.fragment_story.*
 class StoryFragment : Fragment(R.layout.fragment_story) {
 
     private val viewModel: StoryViewModel by viewModels {
-        StoryViewModelFactory(getString(R.string.story_text))
+        StoryViewModelFactory(getString(R.string.match_text))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.setStoryText(getString(R.string.story_text))
         viewModel.matchText.observe(viewLifecycleOwner, Observer {
             match_text.text = it
         })

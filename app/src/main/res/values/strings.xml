@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">FocusStartHomework</string>
     <string name="search_hint">Поиск по тексту</string>
-    <string name="matches_text">Количество совпадений: 0</string>
+    <string name="match_text">Количество совпадений: </string>
     <string name="story_title">Живая шляпа — Носов Н. Н.</string>
     <string name="story_text">
         Шляпа лежала на комоде, котенок Васька сидел на полу возле комода, а Вовка и Вадик сидели за столом и раскрашивали картинки.
