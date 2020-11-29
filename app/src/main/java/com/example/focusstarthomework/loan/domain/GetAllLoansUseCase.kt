@@ -1,10 +1,10 @@
-package com.example.focusstarthomework.story.domain
+package com.example.focusstarthomework.loan.domain
 
 import io.reactivex.Flowable
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 
-class FindMatchingOfTextUseCase {
+class GetAllLoansUseCase {
 
     operator fun invoke(storyTextList: List<String>): Flowable<String> {
         return Flowable.fromIterable(storyTextList)
