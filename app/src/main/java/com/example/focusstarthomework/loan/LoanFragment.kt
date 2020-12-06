@@ -15,6 +15,7 @@ class LoanFragment : Fragment(R.layout.fragment_loan) {
         super.onViewCreated(view, savedInstanceState)
 
         val loan = arguments?.getParcelable(LoansListFragment.LOAN) as LoanView?
+
         setupLoan(loan)
     }
 

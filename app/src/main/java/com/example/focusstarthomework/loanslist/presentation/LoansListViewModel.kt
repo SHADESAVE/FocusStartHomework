@@ -56,6 +56,14 @@ class LoansListViewModel(
         getLoansConditions()
     }
 
+    fun createLoanFromDialog(
+        amount: String,
+        percent: String,
+        period: String
+    ) {
+        Log.d("CreateLoan", amount+percent+period)
+    }
+
     private fun getLoansConditions() {
         getLoansConditionsUseCase()
             .observeOn(AndroidSchedulers.mainThread())

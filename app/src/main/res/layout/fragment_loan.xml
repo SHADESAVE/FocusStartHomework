@@ -36,6 +36,7 @@
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:textSize="32sp"
+                android:textStyle="bold"
                 tools:text="REJECTED" />
 
             <View
