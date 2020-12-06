@@ -2,9 +2,10 @@ package com.example.focusstarthomework.authentication.presentation
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.example.focusstarthomework.authentication.domain.entity.RegisteredInUser
 import com.example.focusstarthomework.authentication.domain.LoginUseCase
 import com.example.focusstarthomework.authentication.domain.RegisterUseCase
+import com.example.focusstarthomework.authentication.domain.entity.RegisteredInUser
+import com.example.focusstarthomework.authentication.domain.entity.User
 import com.example.focusstarthomework.utils.SingleLiveEvent
 import io.reactivex.SingleObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -19,24 +20,23 @@ class AuthViewModel(
 
     private var compositeDisposable = CompositeDisposable()
 
-    val loginEvent = SingleLiveEvent<UserView>()
-    val registerEvent = SingleLiveEvent<UserView>()
+    val loginEvent = SingleLiveEvent<User>()
+    val registerEvent = SingleLiveEvent<User>()
     val loginSuccessful = SingleLiveEvent<String>()
 
     fun loginClicked(username: String, password: String) {
-        loginEvent.value = UserView(username, password)
+        loginEvent.value = User(username, password)
     }
 
     fun registerClicked(username: String, password: String) {
-        registerEvent.value = UserView(username, password)
+        registerEvent.value = User(username, password)
     }
 
-    fun login(user: UserView) {
-        loginUseCase(user.name, user.password)
+    fun login(user: User) {
+        loginUseCase(user)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : SingleObserver<ResponseBody> {
                 override fun onSuccess(t: ResponseBody) {
-                    Log.d("Bearer", t.string())
                     loginSuccessful.value = t.string()
                 }
 
@@ -50,8 +50,8 @@ class AuthViewModel(
             })
     }
 
-    fun register(user: UserView) {
-        registerUseCase(user.name, user.password)
+    fun register(user: User) {
+        registerUseCase(user)
             .subscribe(object : SingleObserver<RegisteredInUser> {
                 override fun onSuccess(t: RegisteredInUser) {
                     login(user)

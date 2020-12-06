@@ -1,10 +1,8 @@
 package com.example.focusstarthomework.authentication.ui
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -25,33 +23,27 @@ class AuthFragment : Fragment(R.layout.fragment_login) {
         AuthViewModelFactory()
     }
 
-    private var sharedPrefs: SharedPreferences? = null
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         loadToken()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.loginEvent.observe(viewLifecycleOwner, Observer { viewModel.login(it) })
+        viewModel.registerEvent.observe(viewLifecycleOwner, Observer { viewModel.register(it) })
         viewModel.loginSuccessful.observe(viewLifecycleOwner, Observer {
             saveToken(it)
-            findNavController().navigate(R.id.action_authFragment_to_loanFragment)
-        })
-
-        viewModel.loginEvent.observe(viewLifecycleOwner, Observer {
-            viewModel.login(it)
-        })
-
-        viewModel.registerEvent.observe(viewLifecycleOwner, Observer {
-            viewModel.register(it)
+            changeFragment(it)
         })
 
         login_button.setOnClickListener {
-            viewModel.loginClicked(username.text.toString().trim(), password.text.toString().trim())
+            viewModel.loginClicked(
+                username.text.toString().trim(),
+                password.text.toString().trim()
+            )
         }
-
         register_button.setOnClickListener {
             viewModel.registerClicked(
                 username.text.toString().trim(),
@@ -67,19 +59,20 @@ class AuthFragment : Fragment(R.layout.fragment_login) {
         editor.apply {
             putString(TOKEN_KEY, token)
         }.apply()
-
-        Toast.makeText(context, "Data saved", Toast.LENGTH_SHORT).show()
     }
 
     private fun loadToken() {
         val sharedPreferences =
             activity?.getSharedPreferences(TOKEN_PREFS, Context.MODE_PRIVATE) ?: return
         val token = sharedPreferences.getString(TOKEN_KEY, null)
-
-        Toast.makeText(context, "Data loaded", Toast.LENGTH_SHORT).show()
-
-        token?.let {
-            findNavController().navigate(R.id.action_authFragment_to_loanFragment)
+        if (!token.isNullOrBlank()) {
+            changeFragment(token)
         }
+    }
+
+    private fun changeFragment(token: String) {
+        findNavController().navigate(
+            R.id.action_authFragment_to_loansListFragment,
+            Bundle().apply { putString(TOKEN_KEY, token) })
     }
 }

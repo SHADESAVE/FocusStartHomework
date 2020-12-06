@@ -11,13 +11,22 @@
         android:label="AuthFragment"
         tools:layout="@layout/fragment_login" >
         <action
-            android:id="@+id/action_authFragment_to_loanFragment"
-            app:destination="@id/loanFragment" />
+            android:id="@+id/action_authFragment_to_loansListFragment"
+            app:destination="@id/loansListFragment" />
     </fragment>
 
     <fragment
+        android:id="@+id/loansListFragment"
+        android:name="com.example.focusstarthomework.loanslist.ui.LoansListFragment"
+        android:label="LoansListFragment"
+        tools:layout="@layout/fragment_loans_list">
+        <action
+            android:id="@+id/action_loansListFragment_to_loanFragment"
+            app:destination="@id/loanFragment" />
+    </fragment>
+    <fragment
         android:id="@+id/loanFragment"
-        android:name="com.example.focusstarthomework.loan.ui.LoanFragment"
+        android:name="com.example.focusstarthomework.loan.LoanFragment"
         android:label="LoanFragment"
         tools:layout="@layout/fragment_loan"/>
 

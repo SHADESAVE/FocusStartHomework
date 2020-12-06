@@ -8,12 +8,6 @@ import com.example.focusstarthomework.authentication.data.AuthRepositoryImpl
 import com.example.focusstarthomework.authentication.domain.LoginUseCase
 import com.example.focusstarthomework.authentication.domain.RegisterUseCase
 import com.example.focusstarthomework.authentication.presentation.AuthViewModel
-import io.reactivex.schedulers.Schedulers
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
 
 
 class AuthViewModelFactory() : ViewModelProvider.Factory {

@@ -1,8 +1,19 @@
 <resources>
-    <string name="app_name">Focus Start Homework</string>
-    <!-- Strings related to login -->
+    <string name="app_name">Online loans</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_up">Sign Up</string>
     <string name="action_sign_in">Sign in</string>
+    <string name="loan_title_text">Займ №</string>
+    <string name="loan_err_text">Ой что-то пошло не так, не удалось загрузить подробную информацию о займе</string>
+    <string name="loan_registered">Ваша заявка зарегистрирована, сейчас она находится на рассмотрении модераторами.</string>
+    <string name="loan_rejected">К сожалению, ваша заявка на займ была отклонена, подробности можно узнать, позвонив на наш контактный телефон.</string>
+    <string name="get_loan_guide">Для того, чтобы получить заём:\n
+        1) в банке, необходимо посетить наш ближайший заёмный центр и уточнить персональные данные, номер и статус займа\n
+        2) на карту, неободимо позвонить на наш контактный телефон, уточнить персональные данные, номер и статус займа, уточнить номер карты, на который будет осуществлён перевод, в случае удовлетворения операции.
+    </string>
+    <string name="loan">Заявка о займе</string>
+    <string name="amount">Сумма (в руб.)</string>
+    <string name="percent">Процент</string>
+    <string name="period">Период (в мес.)</string>
 </resources>

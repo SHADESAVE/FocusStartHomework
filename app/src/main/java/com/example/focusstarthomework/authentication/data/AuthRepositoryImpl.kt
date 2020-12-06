@@ -4,7 +4,7 @@ import com.example.focusstarthomework.authentication.domain.AuthRepository
 import com.example.focusstarthomework.authentication.domain.entity.User
 
 class AuthRepositoryImpl(
-    private val authDataSource: AuthDataSourceImpl
+    private val authDataSource: AuthDataSource
 ): AuthRepository {
     override fun login(user: User) =
         authDataSource.login(user)
