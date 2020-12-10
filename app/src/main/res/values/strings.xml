@@ -1,19 +1,65 @@
 <resources>
     <string name="app_name">Online loans</string>
-    <string name="prompt_email">Email</string>
+    <string name="prompt_name">Name</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_up">Sign Up</string>
     <string name="action_sign_in">Sign in</string>
-    <string name="loan_title_text">Займ №</string>
-    <string name="loan_err_text">Ой что-то пошло не так, не удалось загрузить подробную информацию о займе</string>
-    <string name="loan_registered">Ваша заявка зарегистрирована, сейчас она находится на рассмотрении модераторами.</string>
-    <string name="loan_rejected">К сожалению, ваша заявка на займ была отклонена, подробности можно узнать, позвонив на наш контактный телефон.</string>
-    <string name="get_loan_guide">Для того, чтобы получить заём:\n
-        1) в банке, необходимо посетить наш ближайший заёмный центр и уточнить персональные данные, номер и статус займа\n
-        2) на карту, неободимо позвонить на наш контактный телефон, уточнить персональные данные, номер и статус займа, уточнить номер карты, на который будет осуществлён перевод, в случае удовлетворения операции.
-    </string>
-    <string name="loan">Заявка о займе</string>
-    <string name="amount">Сумма (в руб.)</string>
-    <string name="percent">Процент</string>
-    <string name="period">Период (в мес.)</string>
+    <string name="loan_title_text">Loan №</string>
+
+    <string name="loan_registered">Your credit is registered and is currently being reviewed by moderators</string>
+    <string name="loan_rejected">
+        Unfortunately, your loan was rejected, you can find details by contacting us:\n\n
+        Our contacts:\n loans.online@mail.com\n +0 000 000–00–00\n\n</string>
+    <string name="get_loan_guide">
+        Your loan is approved for receiving it:\n\n – at the Bank,
+        you should contact the nearest credit center and check your personal data.
+        if everything is confirmed, you will receive your money in cash.\n\n – on the card.
+        you must call us, confirm your personal data and provide the details of the card
+        to which the money transfer will be sent.</string>
+
+    <string name="dialog_help_title">Help</string>
+    <string name="dialog_help_text">
+        Our contacts:\n loans.online@mail.com\n +0 000 000–00–00\n\n
+        Hi, to create a loan, you need to click the ( + ) button on the right side of the screen,
+        then you need to fill in personal information and enter the loan amount not exceeding the maximum amount,
+        if you agree with the loan percentage and period, click on the ( Create ) button.
+        You can see the status of your loan in the list of loans.
+        To view detailed information on the loan click on it in the list of credits.</string>
+
+    <string name="dialog_personal_data_title">Enter a personal data</string>
+    <string name="dialog_personal_data_first_name">First name</string>
+    <string name="dialog_personal_data_last_name">Last name</string>
+    <string name="dialog_personal_data_phone_number">+0 000 000–00–00</string>
+
+    <string name="dialog_loan_title">Get a loan</string>
+    <string name="dialog_loan_amount">Enter loan amount</string>
+    <string name="dialog_loan_conditions_info">Maximum available amount:\n%.2f rub\nat %.2f%%\nfor %d months</string>
+
+    <string name="dialog_negative_button">Cancel</string>
+    <string name="dialog_positive_next_button">Next</string>
+    <string name="dialog_positive_create_button">Create</string>
+    <string name="dialog_positive_ok_button">OK</string>
+
+    <string name="create_loan_is_successful">Loan is created</string>
+
+
+    <string name="menu_filter">Filter</string>
+    <string name="filter_all">All</string>
+    <string name="filter_approved">Approved</string>
+    <string name="filter_registered">Registered</string>
+    <string name="filter_rejected">Rejected</string>
+    <string name="menu_help">Help</string>
+    <string name="menu_exit">Exit</string>
+
+    <string name="error_http_401">Error: Unauthorized</string>
+    <string name="error_http_403">Error: Forbidden</string>
+    <string name="error_http_404">Error: Not found</string>
+    <string name="error_unknown_host">Error: Unable to resolve host</string>
+    <string name="error_unhandled_error">Error: Unhandled error</string>
+
+    <string name="amount_error">You have entered the amount exceeding the maximum allowable</string>
+
+    <string name="retry_button">Retry</string>
+    <string name="loan_amount_percent_period">%.2f rub\nat %.2f%%\nfor %d months</string>
+
 </resources>

@@ -1,34 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.cardview.widget.CardView
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="64dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
+    <Button
+        android:id="@+id/retry_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/retry_button"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        app:cardCornerRadius="3dp"
-        app:cardMaxElevation="2dp"
-        app:contentPadding="4dp">
-
-        <TextView
-            android:id="@+id/loan_err_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="@string/loan_err_text"
-            android:textColor="@color/design_default_color_error"
-            android:textSize="22sp"
-            android:visibility="gone" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
             android:id="@+id/loan_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_margin="8dp">
 
             <TextView
                 android:id="@+id/state"
@@ -37,7 +59,7 @@
                 android:textAlignment="center"
                 android:textSize="32sp"
                 android:textStyle="bold"
-                tools:text="REJECTED" />
+                tools:text="@string/filter_rejected" />
 
             <View
                 android:layout_width="match_parent"
@@ -46,27 +68,41 @@
                 android:background="@android:color/darker_gray" />
 
             <TextView
-                android:id="@+id/full_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="22sp"
-                tools:text="Петя Петухов" />
-
-            <TextView
                 android:id="@+id/amount_percent_period"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:textAlignment="center"
                 android:textSize="22sp"
-                tools:text="Петя Петухов" />
+                tools:text="@string/loan_amount_percent_period" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="4dp"
+                android:background="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                tools:text="@string/prompt_name" />
+
+            <TextView
+                android:id="@+id/full_name"
+                android:layout_marginTop="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                tools:text="@string/prompt_name" />
 
             <TextView
                 android:id="@+id/phone_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:textSize="22sp"
-                tools:text="8-800-555-35-35" />
+                android:textSize="18sp"
+                tools:text="@string/prompt_name" />
 
             <View
                 android:layout_width="match_parent"
@@ -74,16 +110,17 @@
                 android:layout_margin="4dp"
                 android:background="@android:color/darker_gray" />
 
+
             <TextView
                 android:id="@+id/loan_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
-                tools:text="@string/get_loan_guide"/>
+                tools:text="@string/get_loan_guide" />
 
         </LinearLayout>
 
+    </androidx.core.widget.NestedScrollView>
 
-    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
 
-</ScrollView>

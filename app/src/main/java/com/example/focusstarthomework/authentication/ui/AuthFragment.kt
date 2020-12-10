@@ -1,6 +1,5 @@
 package com.example.focusstarthomework.authentication.ui
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -10,6 +9,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.focusstarthomework.R
 import com.example.focusstarthomework.authentication.di.AuthViewModelFactory
 import com.example.focusstarthomework.authentication.presentation.AuthViewModel
+import com.example.focusstarthomework.authentication.presentation.LoadingState
+import com.example.focusstarthomework.utils.ErrorState
 import kotlinx.android.synthetic.main.fragment_login.*
 
 class AuthFragment : Fragment(R.layout.fragment_login) {
@@ -17,33 +18,38 @@ class AuthFragment : Fragment(R.layout.fragment_login) {
     companion object {
         const val TOKEN_PREFS = "TOKEN_PREFS"
         const val TOKEN_KEY = "TOKEN_KEY"
+        const val NEW_USER = "NEW_USER"
     }
 
     private val viewModel: AuthViewModel by viewModels {
-        AuthViewModelFactory()
+        AuthViewModelFactory(requireContext())
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        loadToken()
+        viewModel.checkToken()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.loginEvent.observe(viewLifecycleOwner, Observer { viewModel.login(it) })
-        viewModel.registerEvent.observe(viewLifecycleOwner, Observer { viewModel.register(it) })
-        viewModel.loginSuccessful.observe(viewLifecycleOwner, Observer {
-            saveToken(it)
-            changeFragment(it)
-        })
+        viewModel.loginEvent.observe(viewLifecycleOwner, Observer { viewModel.loginUser(it) })
+        viewModel.registerEvent.observe(viewLifecycleOwner, Observer { viewModel.registerUser(it) })
+        viewModel.loadingEvent.observe(viewLifecycleOwner, Observer(::loadingManager))
+        viewModel.errorEvent.observe(viewLifecycleOwner, Observer(::showError))
+        viewModel.setupNavController(findNavController())
 
+        setupButtonClickListeners()
+    }
+
+    private fun setupButtonClickListeners() {
         login_button.setOnClickListener {
             viewModel.loginClicked(
                 username.text.toString().trim(),
                 password.text.toString().trim()
             )
         }
+
         register_button.setOnClickListener {
             viewModel.registerClicked(
                 username.text.toString().trim(),
@@ -52,27 +58,55 @@ class AuthFragment : Fragment(R.layout.fragment_login) {
         }
     }
 
-    private fun saveToken(token: String) {
-        val sharedPreferences =
-            activity?.getSharedPreferences(TOKEN_PREFS, Context.MODE_PRIVATE) ?: return
-        val editor = sharedPreferences.edit()
-        editor.apply {
-            putString(TOKEN_KEY, token)
-        }.apply()
-    }
-
-    private fun loadToken() {
-        val sharedPreferences =
-            activity?.getSharedPreferences(TOKEN_PREFS, Context.MODE_PRIVATE) ?: return
-        val token = sharedPreferences.getString(TOKEN_KEY, null)
-        if (!token.isNullOrBlank()) {
-            changeFragment(token)
+    private fun loadingManager(loadingState: LoadingState) {
+        when (loadingState) {
+            LoadingState.LOADING -> {
+                loading.visibility = View.VISIBLE
+                username.visibility = View.GONE
+                password.visibility = View.GONE
+                login_button.visibility = View.GONE
+                register_button.visibility = View.GONE
+            }
+            LoadingState.DONE -> {
+                loading.visibility = View.GONE
+                username.visibility = View.VISIBLE
+                password.visibility = View.VISIBLE
+                login_button.visibility = View.VISIBLE
+                register_button.visibility = View.VISIBLE
+            }
+            LoadingState.ERROR -> {
+                loading.visibility = View.GONE
+                username.visibility = View.VISIBLE
+                password.visibility = View.VISIBLE
+                login_button.visibility = View.VISIBLE
+                register_button.visibility = View.VISIBLE
+            }
         }
     }
 
-    private fun changeFragment(token: String) {
-        findNavController().navigate(
-            R.id.action_authFragment_to_loansListFragment,
-            Bundle().apply { putString(TOKEN_KEY, token) })
+    private fun showError(errorState: ErrorState) {
+        when (errorState) {
+            ErrorState.HTTP401 -> viewModel.showToast(
+                requireContext(),
+                getString(R.string.error_http_401)
+            )
+            ErrorState.HTTP403 -> viewModel.showToast(
+                requireContext(),
+                getString(R.string.error_http_403)
+            )
+            ErrorState.HTTP404 -> viewModel.showToast(
+                requireContext(),
+                getString(R.string.error_http_404)
+            )
+            ErrorState.UNKNOWN_HOST -> viewModel.showToast(
+                requireContext(),
+                getString(R.string.error_unknown_host)
+            )
+            ErrorState.UNHANDLED_ERROR -> viewModel.showToast(
+                requireContext(),
+                getString(R.string.error_unhandled_error)
+            )
+        }
     }
+
 }

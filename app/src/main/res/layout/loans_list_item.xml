@@ -13,46 +13,45 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="4dp">
 
         <TextView
             android:id="@+id/loan_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="22sp"
             android:text="@string/loan_title_text"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/loan_title"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/loan_id"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_marginStart="2dp"
             android:layout_marginEnd="4dp"
-            android:layout_width="0dp"
-            android:textSize="22sp"
-
-            android:layout_height="match_parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/state"
             app:layout_constraintStart_toEndOf="@id/loan_title"
-            tools:text="8-800-555-35-35"/>
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="8-800-555-35-35" />
 
         <TextView
             android:id="@+id/state"
-            android:textSize="22sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="textEnd"
+            android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/loan_id"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="APPROVED" />
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

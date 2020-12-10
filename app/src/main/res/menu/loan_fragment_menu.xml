@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_filter_group"
+        android:icon="@drawable/ic_baseline_filter_list_24"
+        android:title="@string/menu_filter"
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/menu_filter_all"
+                android:title="@string/filter_all" />
+            <item
+                android:id="@+id/menu_filter_approved"
+                android:title="@string/filter_approved" />
+            <item
+                android:id="@+id/menu_filter_registered"
+                android:title="@string/filter_registered" />
+            <item
+                android:id="@+id/menu_filter_rejected"
+                android:title="@string/filter_rejected" />
+        </menu>
+    </item>
+    <item
+        android:id="@+id/menu_help"
+        android:title="@string/menu_help" />
+    <item
+        android:id="@+id/menu_exit"
+        android:title="@string/menu_exit" />
+</menu>

@@ -17,17 +17,29 @@
 
     <fragment
         android:id="@+id/loansListFragment"
-        android:name="com.example.focusstarthomework.loanslist.ui.LoansListFragment"
+        android:name="com.example.focusstarthomework.loans.ui.fragments.LoansListFragment"
         android:label="LoansListFragment"
         tools:layout="@layout/fragment_loans_list">
         <action
             android:id="@+id/action_loansListFragment_to_loanFragment"
             app:destination="@id/loanFragment" />
+        <action
+            android:id="@+id/action_loansListFragment_to_authFragment"
+            app:popUpTo="@+id/authFragment"
+            app:popUpToInclusive="true"
+            app:destination="@id/authFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/loanFragment"
-        android:name="com.example.focusstarthomework.loan.LoanFragment"
+        android:name="com.example.focusstarthomework.loans.ui.fragments.LoanFragment"
         android:label="LoanFragment"
-        tools:layout="@layout/fragment_loan"/>
+        tools:layout="@layout/fragment_loan">
+        <action
+            android:id="@+id/action_loanFragment_to_authFragment"
+            app:popUpTo="@+id/authFragment"
+            app:popUpToInclusive="true"
+            app:destination="@id/authFragment" />
+    </fragment>
 
 </navigation>
