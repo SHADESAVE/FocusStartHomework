@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.focusstarthomework.R
 import com.example.focusstarthomework.authentication.di.AuthViewModelFactory
+import com.example.focusstarthomework.authentication.domain.entity.User
 import com.example.focusstarthomework.authentication.presentation.AuthViewModel
 import com.example.focusstarthomework.authentication.presentation.LoadingState
 import com.example.focusstarthomework.utils.ErrorState
@@ -33,15 +34,10 @@ class AuthFragment : Fragment(R.layout.fragment_login) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.loginEvent.observe(viewLifecycleOwner, Observer { viewModel.loginUser(it) })
-        viewModel.registerEvent.observe(viewLifecycleOwner, Observer { viewModel.registerUser(it) })
         viewModel.loadingEvent.observe(viewLifecycleOwner, Observer(::loadingManager))
         viewModel.errorEvent.observe(viewLifecycleOwner, Observer(::showError))
         viewModel.emptyFieldsEvent.observe(viewLifecycleOwner, Observer {
-            viewModel.showToast(
-                requireContext(),
-                getString(R.string.empty_auth)
-            )
+            viewModel.showToast(requireContext(), getString(R.string.empty_auth))
         })
         viewModel.setupNavController(findNavController())
 
@@ -50,16 +46,14 @@ class AuthFragment : Fragment(R.layout.fragment_login) {
 
     private fun setupButtonClickListeners() {
         login_button.setOnClickListener {
-            viewModel.loginClicked(
-                username.text.toString().trim(),
-                password.text.toString().trim()
+            viewModel.loginUser(
+                User(username.text.toString().trim(), password.text.toString().trim())
             )
         }
 
         register_button.setOnClickListener {
-            viewModel.registerClicked(
-                username.text.toString().trim(),
-                password.text.toString().trim()
+            viewModel.registerUser(
+                User(username.text.toString().trim(), password.text.toString().trim())
             )
         }
     }

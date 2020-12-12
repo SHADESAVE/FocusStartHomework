@@ -30,8 +30,6 @@ class AuthViewModel(
     private var compositeDisposable = CompositeDisposable()
     private var newUser = false
 
-    val loginEvent = SingleLiveEvent<User>()
-    val registerEvent = SingleLiveEvent<User>()
     val loadingEvent = SingleLiveEvent<LoadingState>()
     val errorEvent = SingleLiveEvent<ErrorState>()
     val emptyFieldsEvent = SingleLiveEvent<Boolean>()
@@ -46,24 +44,15 @@ class AuthViewModel(
             changeFragmentToLoansList(token)
     }
 
-    fun loginClicked(username: String, password: String) {
-        if (username.isBlank() || password.isBlank()) {
-            emptyFieldsEvent.value = true
-            return
-        }
-        loginEvent.value = User(username, password)
-    }
-
-    fun registerClicked(username: String, password: String) {
-        if (username.isBlank() || password.isBlank()) {
-            emptyFieldsEvent.value = true
-            return
-        }
-        registerEvent.value = User(username, password)
-    }
-
     fun loginUser(user: User) {
+
+        if (user.name.isBlank() || user.password.isBlank()) {
+            emptyFieldsEvent.value = true
+            return
+        }
+
         loadingEvent.value = LoadingState.LOADING
+
         compositeDisposable.add(
             loginUseCase(user)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -81,7 +70,14 @@ class AuthViewModel(
     }
 
     fun registerUser(user: User) {
+
+        if (user.name.isBlank() || user.password.isBlank()) {
+            emptyFieldsEvent.value = true
+            return
+        }
+
         loadingEvent.value = LoadingState.LOADING
+
         compositeDisposable.addAll(
             registerUseCase(user)
                 .observeOn(AndroidSchedulers.mainThread())

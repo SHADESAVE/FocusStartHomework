@@ -40,6 +40,8 @@ class LoansViewModel(
 
     private val loansList = mutableListOf<Loan>()
 
+    val loansListReceived: MutableLiveData<List<Loan>> = MutableLiveData()
+
     val loadingEvent = SingleLiveEvent<LoadingState>()
     val errorEvent = SingleLiveEvent<ErrorState>()
     val emptyPersonalDataEvent = SingleLiveEvent<Boolean>()
@@ -47,7 +49,6 @@ class LoansViewModel(
     val amountGreaterMaxEvent = SingleLiveEvent<Boolean>()
 
     val loanCreated = SingleLiveEvent<Boolean>()
-    val loansListReceived: MutableLiveData<List<Loan>> = MutableLiveData()
     val loanReceived = SingleLiveEvent<Loan>()
     val conditionsReceived = SingleLiveEvent<Conditions>()
 
@@ -57,6 +58,7 @@ class LoansViewModel(
 
     fun getLoansList() {
         loadingEvent.value = LoadingState.LOADING
+
         compositeDisposable.add(
             getLoansListUseCase()
                 .observeOn(AndroidSchedulers.mainThread())
@@ -77,6 +79,7 @@ class LoansViewModel(
 
     fun getLoanById(id: Long) {
         loadingEvent.value = LoadingState.LOADING
+
         compositeDisposable.add(
             getLoanByIdUseCase(id)
                 .observeOn(AndroidSchedulers.mainThread())
