@@ -37,6 +37,12 @@ class AuthFragment : Fragment(R.layout.fragment_login) {
         viewModel.registerEvent.observe(viewLifecycleOwner, Observer { viewModel.registerUser(it) })
         viewModel.loadingEvent.observe(viewLifecycleOwner, Observer(::loadingManager))
         viewModel.errorEvent.observe(viewLifecycleOwner, Observer(::showError))
+        viewModel.emptyFieldsEvent.observe(viewLifecycleOwner, Observer {
+            viewModel.showToast(
+                requireContext(),
+                getString(R.string.empty_auth)
+            )
+        })
         viewModel.setupNavController(findNavController())
 
         setupButtonClickListeners()

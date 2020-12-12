@@ -37,17 +37,19 @@ class LoansViewModel(
     private lateinit var navController: NavController
 
     private var compositeDisposable = CompositeDisposable()
+
     private val loansList = mutableListOf<Loan>()
 
     val loadingEvent = SingleLiveEvent<LoadingState>()
     val errorEvent = SingleLiveEvent<ErrorState>()
+    val emptyPersonalDataEvent = SingleLiveEvent<Boolean>()
+    val emptyAmountEvent = SingleLiveEvent<Boolean>()
+    val amountGreaterMaxEvent = SingleLiveEvent<Boolean>()
 
     val loanCreated = SingleLiveEvent<Boolean>()
-    val amountErrorReceived = SingleLiveEvent<Boolean>()
     val loansListReceived: MutableLiveData<List<Loan>> = MutableLiveData()
     val loanReceived = SingleLiveEvent<Loan>()
     val conditionsReceived = SingleLiveEvent<Conditions>()
-
 
     fun setupNavController(navController: NavController) {
         this.navController = navController
@@ -117,9 +119,10 @@ class LoansViewModel(
         period: Int,
         phoneNumber: String
     ) {
+        amount.isBlank().let { emptyAmountEvent.value = true }
         amount.toDoubleOrNull()?.let {
             if (it > maxAmount)
-                amountErrorReceived.value = true
+                amountGreaterMaxEvent.value = true
             else
                 createNewLoan(NewLoanDTO(it, fistName, lastName, percent, period, phoneNumber))
         }
@@ -187,6 +190,11 @@ class LoansViewModel(
         lastName: String,
         phoneNumber: String
     ) {
+        if (firstName.isBlank() || lastName.isBlank() || phoneNumber.isBlank()) {
+            emptyPersonalDataEvent.value = true
+            return
+        }
+
         val loanAmountDialogLayout =
             LayoutInflater.from(context).inflate(R.layout.get_loan_amount_dialog, null)
 

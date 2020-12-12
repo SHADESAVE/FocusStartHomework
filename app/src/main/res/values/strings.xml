@@ -61,5 +61,8 @@
 
     <string name="retry_button">Retry</string>
     <string name="loan_amount_percent_period">%.2f rub\nat %.2f%%\nfor %d months</string>
+    <string name="empty_amount_error">You didn\'t enter anything in the Amount field</string>
+    <string name="empty_personal_data">You didn\'t fill out your personal information</string>
+    <string name="empty_auth">You didn\'t fill username or password</string>
 
 </resources>

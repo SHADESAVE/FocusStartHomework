@@ -34,6 +34,7 @@ class AuthViewModel(
     val registerEvent = SingleLiveEvent<User>()
     val loadingEvent = SingleLiveEvent<LoadingState>()
     val errorEvent = SingleLiveEvent<ErrorState>()
+    val emptyFieldsEvent = SingleLiveEvent<Boolean>()
 
     fun setupNavController(navController: NavController) {
         this.navController = navController
@@ -46,10 +47,18 @@ class AuthViewModel(
     }
 
     fun loginClicked(username: String, password: String) {
+        if (username.isBlank() || password.isBlank()) {
+            emptyFieldsEvent.value = true
+            return
+        }
         loginEvent.value = User(username, password)
     }
 
     fun registerClicked(username: String, password: String) {
+        if (username.isBlank() || password.isBlank()) {
+            emptyFieldsEvent.value = true
+            return
+        }
         registerEvent.value = User(username, password)
     }
 

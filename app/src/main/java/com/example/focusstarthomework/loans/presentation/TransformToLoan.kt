@@ -35,9 +35,11 @@ private fun getLoan(loanDTO: LoanDTO, color: Int) =
         stateColor = color
     )
 
-private fun transformDate(date: String): String {
-    val format1 =
-        OffsetDateTime.parse(date)
-            .format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM).withLocale(Locale.US))
-    return format1.toString()
-}
+private fun transformDate(date: String) =
+    OffsetDateTime.parse(date)
+        .format(
+            DateTimeFormatter
+                .ofLocalizedDateTime(FormatStyle.MEDIUM)
+                .withLocale(Locale.US)
+        )
+        .toString()

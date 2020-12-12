@@ -54,27 +54,21 @@ class LoansListFragment : Fragment(R.layout.fragment_loans_list) {
             remove(AuthFragment.NEW_USER)
         }
 
-        viewModel.loansListReceived.observe(
-            viewLifecycleOwner,
-            Observer {
-                adapter.setLoansList(it)
-            })
-        viewModel.loanCreated.observe(
-            viewLifecycleOwner,
-            Observer {
-                viewModel.showToast(
-                    requireContext(),
-                    getString(R.string.create_loan_is_successful)
-                )
-            })
-        viewModel.amountErrorReceived.observe(
-            viewLifecycleOwner,
-            Observer {
-                viewModel.showToast(
-                    requireContext(),
-                    getString(R.string.amount_error)
-                )
-            })
+        viewModel.loansListReceived.observe(viewLifecycleOwner, Observer {
+            adapter.setLoansList(it)
+        })
+        viewModel.loanCreated.observe(viewLifecycleOwner, Observer {
+            viewModel.showToast(requireContext(), getString(R.string.create_loan_is_successful))
+        })
+        viewModel.emptyPersonalDataEvent.observe(viewLifecycleOwner, Observer {
+            viewModel.showToast(requireContext(), getString(R.string.empty_personal_data))
+        })
+        viewModel.emptyAmountEvent.observe(viewLifecycleOwner, Observer {
+            viewModel.showToast(requireContext(), getString(R.string.empty_amount_error))
+        })
+        viewModel.amountGreaterMaxEvent.observe(viewLifecycleOwner, Observer {
+            viewModel.showToast(requireContext(), getString(R.string.amount_error))
+        })
         viewModel.conditionsReceived.observe(viewLifecycleOwner, Observer {
             viewModel.showLoanDialog(requireContext())
         })
@@ -83,6 +77,10 @@ class LoansListFragment : Fragment(R.layout.fragment_loans_list) {
         viewModel.setupNavController(findNavController())
         viewModel.getLoansList()
 
+        setupClickListeners()
+    }
+
+    private fun setupClickListeners() {
         retry_button.setOnClickListener { viewModel.getLoansList() }
         create_loan_fab.setOnClickListener {
             it.visibility = View.GONE
