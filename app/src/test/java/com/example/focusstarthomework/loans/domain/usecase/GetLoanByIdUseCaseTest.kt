@@ -6,7 +6,6 @@ import com.example.focusstarthomework.loans.data.LoansDataSourceImpl
 import com.example.focusstarthomework.loans.data.LoansRepositoryImpl
 import com.example.focusstarthomework.loans.data.network.LoansApi
 import org.junit.Test
-import org.mockito.ArgumentMatchers.anyLong
 import retrofit2.HttpException
 
 class GetLoanByIdUseCaseTest {
@@ -19,7 +18,7 @@ class GetLoanByIdUseCaseTest {
     fun `get loan by id EXPECT http 403 error`() {
         val useCase = GetLoanByIdUseCase(remoteRepository)
 
-        useCase(anyLong())
+        useCase(2)
             .test()
             .await()
             .assertError { e -> e is HttpException && e.code() == 403 }
