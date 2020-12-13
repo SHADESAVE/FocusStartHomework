@@ -21,11 +21,4 @@ class LoansRepositoryImpl(
     override fun getLoanConditions() =
         loansDataSource.getLoanConditions()
 
-//    override fun saveTokenInSharedPrefs(token: String, tokenKey: String, prefsKey: String) {
-//        localDataSource.saveToken(token, tokenKey, prefsKey)
-//    }
-//
-//    override fun getTokenFromSharedPrefs(tokenKey: String, prefsKey: String): String? =
-//        localDataSource.getToken(tokenKey, prefsKey)
-
 }
