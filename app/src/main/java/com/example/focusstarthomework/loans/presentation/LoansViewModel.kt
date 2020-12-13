@@ -122,7 +122,9 @@ class LoansViewModel(
         period: Int,
         phoneNumber: String
     ) {
-        amount.isBlank().let { emptyAmountEvent.value = true }
+        if (amount.isBlank()) {
+            emptyAmountEvent.value = true
+        }
         amount.toDoubleOrNull()?.let {
             if (it > maxAmount)
                 amountGreaterMaxEvent.value = true
@@ -193,7 +195,7 @@ class LoansViewModel(
         lastName: String,
         phoneNumber: String
     ) {
-        if (firstName.isBlank() || lastName.isBlank() || phoneNumber.isBlank()) {
+        if (firstName.isEmpty() || lastName.isEmpty() || phoneNumber.isBlank()) {
             emptyPersonalDataEvent.value = true
             return
         }
